@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\MenuController;
+use App\Http\Controllers\API\MaterialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('menus',[MenuController::class, 'index']);
+Route::get('materials/{menuId}',[MaterialController::class, 'getMaterial']);
