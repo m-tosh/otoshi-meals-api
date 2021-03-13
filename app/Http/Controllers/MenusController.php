@@ -49,8 +49,6 @@ class MenusController extends Controller
 
         // 材料を１つずつ登録
         for( $i = 0; $i < count($materials); $i++ ) {
-            echo $materials[$i];
-            echo $amounts[$i];
             if(!empty($materials[$i])) self::regMenusMate($theMenu->id, $materials[$i], $amounts[$i]);
         }
 
@@ -65,7 +63,6 @@ class MenusController extends Controller
         $mate->menu_id = $menuId;
         $mate->name = $mateName;
         $mate->mount = $mateAmount;
-        var_dump($mate);
         $mate->save();
     }
 
