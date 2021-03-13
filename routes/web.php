@@ -15,7 +15,7 @@ use App\Http\Controllers\MenusController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Auth::routes(['register' => false, 'reset' => false]);
