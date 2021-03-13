@@ -34,17 +34,17 @@
                 </span>
             @enderror
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="material[]">材料名</label>
-                <input type="text" class="form-control" id="material[]" name="material[]" placeholder="ざいりょう">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="amount[]">数量</label>
-                <input type="text" class="form-control" id="amount[]" name="amount[]" placeholder="かず">
-            </div>
-        </div>
         <div id="materials">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="material[]">材料名</label>
+                    <input type="text" class="form-control" id="material[]" name="material[]" placeholder="ざいりょう">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="amount[]">数量</label>
+                    <input type="text" class="form-control" id="amount[]" name="amount[]" placeholder="かず">
+                </div>
+            </div>
         </div>
         <div class="mt-3">
             <button type="button" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" onclick="clickBtn()">＋</button>
@@ -55,23 +55,34 @@
 </body>
 <script>
 function clickBtn(){
-    const div = document.getElementById("materials");
-
     // 要素の追加
-    console.log("yeah");
-    const text_for_name = document.createTextNode("材料名：");
-    div.appendChild(text_for_name);
-    const el_input_name = document.createElement("input");
-    el_input_name.setAttribute("name","material[]");
-    div.appendChild(el_input_name);
+    const parent_div = document.getElementById("materials");
+    const row_div = document.createElement("div");
+    row_div.setAttribute('class', 'form-row');
 
-    const text_for_amount = document.createTextNode(" 数量：");
-    div.appendChild(text_for_amount);
-    const el_input_amount = document.createElement("input");
-    el_input_amount.setAttribute("name","amount[]");
-    div.appendChild(el_input_amount);
+    // form-groupのdivを作成
+    const form_material_div = addFormElements("material[]","ざいりょう");
+    row_div.appendChild(form_material_div);
+    const form_amount_div = addFormElements("amount[]","かず");
+    row_div.appendChild(form_amount_div);
 
-    div.appendChild(document.createElement("br"))
+    parent_div.appendChild(row_div);
+}
+
+function addFormElements(keyName, placeholder){
+    const formgroup_div = document.createElement("div");
+    formgroup_div.setAttribute('class', 'form-group col-md-6');
+
+    const a_input = document.createElement("input");
+    a_input.setAttribute('type', 'text');
+    a_input.setAttribute('class', 'form-control');
+    a_input.setAttribute('id', keyName);
+    a_input.setAttribute('name', keyName);
+    a_input.setAttribute('placeholder', placeholder);
+
+    formgroup_div.appendChild(a_input);
+
+    return formgroup_div
 }
 </script>
 </html>
