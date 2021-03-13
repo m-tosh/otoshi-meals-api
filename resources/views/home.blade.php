@@ -16,6 +16,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                <div class="card-body">
+                    <button class="btn btn-success" onclick="window.location='{{ route("menu-list") }}'">メニュー一覧へ</button>
+                </div>
             </div>
         </div>
     </div>

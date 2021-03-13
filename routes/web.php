@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('menus',[MenusController::class, 'index'])->name('menu-ope');
+Route::get('menu-list',[MenusController::class, 'list'])->name('menu-list');
+Route::post('menus',[MenusController::class, 'create']);
