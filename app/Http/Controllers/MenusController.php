@@ -10,6 +10,12 @@ use App\Models\Material;
 
 class MenusController extends Controller
 {
+    // authorization
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // Indexページの表示
     public function index() {
         return view('menus.index');
