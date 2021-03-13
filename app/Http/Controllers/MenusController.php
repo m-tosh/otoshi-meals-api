@@ -16,6 +16,12 @@ class MenusController extends Controller
         $this->middleware('auth');
     }
 
+    // 一覧ページ
+    public function list() {
+        $menus = Menu::all();
+        return view('menus.list', ['menus' => $menus]);
+    }
+
     // Indexページの表示
     public function index() {
         return view('menus.index');
@@ -45,13 +51,10 @@ class MenusController extends Controller
         for( $i = 0; $i < count($materials); $i++ ) {
             echo $materials[$i];
             echo $amounts[$i];
-            self::regMenusMate($theMenu->id, $materials[$i], $amounts[$i]);
+            if(!empty($materials[$i])) self::regMenusMate($theMenu->id, $materials[$i], $amounts[$i]);
         }
 
-        // 変数をビューに渡す
-        return view('menus.index')->with([
-            "menu" => $menu,
-        ]);
+        return redirect()->route('menu-list');
     }
 
     // ====================

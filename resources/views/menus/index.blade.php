@@ -2,37 +2,56 @@
 <html>
 <head>
     <title>registration</title>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+    <h1>REGISTRATION</h1>
+    @isset($menu, $mtrl_1, $amount_1)
+    commited...<br>
+    {{ $menu }}
+    <br><hr>
+    @endisset
 
-<h1>REGISTRATION</h1>
-@isset($menu, $mtrl_1, $amount_1)
-commited...<br>
-{{ $menu }}
-<br><hr>
-@endisset
-
-<!-- フォームエリア -->
-<h2>メニューと材料の登録</h2>
-<form action="/menus" method="POST">
-    Menu:<br>
-    <input name="menu">
-    @error('menu')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <br>
-    <div id="materials">
-        材料名：<input name="material[]"> 数量：<input name="amount[]">
-        <br>
-    </div>
-    <br>
-    <input type="button" value="追加" onclick="clickBtn()">
-    <br>
-    {{ csrf_field() }}
-    <br>
-    <button class="btn btn-success"> 送信 </button>
-</form>
-
+    <!-- フォームエリア -->
+    <h2>メニューと材料の登録</h2>
+    <form action="/menus" method="POST">
+        {{ csrf_field() }}
+        <div class="form-group">
+            <label for="menu" class="col-form-label text-md-right">{{ __('メニュー：') }}</label>
+            <input id="menu" type="text" class="form-control @error('menu') is-invalid @enderror" name="menu" value="{{ old('menu') }}" required autocomplete="menu" autofocus>
+            @error('menu')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="material[]">材料名</label>
+                <input type="text" class="form-control" id="material[]" name="material[]" placeholder="ざいりょう">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="amount[]">数量</label>
+                <input type="text" class="form-control" id="amount[]" name="amount[]" placeholder="かず">
+            </div>
+        </div>
+        <div id="materials">
+        </div>
+        <div class="mt-3">
+            <button type="button" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;" onclick="clickBtn()">＋</button>
+            <button class="btn btn-success float-right"> 登録 </button>
+        </div>
+    </form>
+</div>
 </body>
 <script>
 function clickBtn(){
